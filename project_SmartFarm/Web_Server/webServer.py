@@ -1,27 +1,27 @@
 from flask import Flask, render_template
 
-mos = 0
-tmp1 = 0
-tmp2 = 0
-hum1 = 0
-hum2 = 0
-lux = 0
+mos = 30
+tmp1 = 25
+tmp2 = 26
+hum1 = 27
+hum2 = 28
+lux = 500
 tmpTarget = 30 #목표온도기준값
-humTarget = 30 #목표습도기준값
+humTarget = 40 #목표습도기준값
 manualControl = 1 #수동/자동제어
 ########################################
 #수동용변수
-fanStateCtrl = 2 #팬 온/오프
-heatStateCtrl = 2 #히터 온/오프
-leftWindowCtrl = 2 #왼쪽개폐기 온/오프
-rightWindowCtrl = 2 #오른쪽개폐기 온/오프
+fanStateCtrl = 0 #팬 온/오프
+heatStateCtrl = 0 #히터 온/오프
+leftWindowCtrl = 0 #왼쪽개폐기 온/오프
+rightWindowCtrl = 0 #오른쪽개폐기 온/오프
 ########################################
 #자동용변수
-fanState = 2 #팬 온/오프
-fanSpeed = 2 #팬속도제어
-leftWindow = 2 #왼쪽개폐기 온/오프
-rightWindow = 2 #오른쪽개폐기 온/오프
-heaterState = 2 #히터 온/오프
+fanState = 0 #팬 온/오프
+fanSpeed = 0 #팬속도제어
+leftWindow = 0 #왼쪽개폐기 온/오프
+rightWindow = 0 #오른쪽개폐기 온/오프
+heaterState = 0 #히터 온/오프
 ########################################
 #컨트롤러변수
 ctrlLeftWindow = 0
@@ -123,7 +123,6 @@ def hello_grd():
 def setManualControl(OnOff):
 	global manualControl
 	manualControl  = OnOff
-	return 'ok'
 
 @app.route('/getManualControl')
 def getManualControl():
@@ -182,7 +181,6 @@ def getRightWindowC():
 def setFanOnOff(OnOff):
 	global fanState
 	fanState = OnOff
-	return 'ok'
 
 @app.route('/getFanState')
 def getFanState():
@@ -193,7 +191,6 @@ def getFanState():
 def setFanSpeed(speed):
 	global fanSpeed
 	fanSpeed = speed
-	return 'ok'
 
 @app.route('/getFanSpeed')
 def getFanSpeed():
@@ -204,13 +201,11 @@ def getFanSpeed():
 def setLeftWindow(OnOff):
 	global leftWindow
 	leftWindow = OnOff
-	return 'ok'
 
 @app.route('/setRightWindow/<OnOff>')
 def setRightWindow(OnOff):
 	global rightWindow
 	rightWindow = OnOff
-	return 'ok'
 
 @app.route('/getLeftWindow')
 def getLeftWindow():
@@ -225,7 +220,6 @@ def getRightWindow():
 def setHeaterOnOff(OnOff):
 	global heaterState
 	heaterState = OnOff
-	return 'ok'
 
 @app.route('/getHeaterState')
 def getHeaterState():
