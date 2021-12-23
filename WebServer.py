@@ -1,8 +1,6 @@
 from flask import Flask, render_template
 
 mos = 0
-tmp1 = 1
-tmp2 = 2
 hum1 = 3
 hum2 = 4
 lux = 0
