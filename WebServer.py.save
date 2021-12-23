@@ -1,0 +1,94 @@
+from flask import Flask
+
+tmp1 = 0 # Now Temperature
+TargetTmp = 20 #Target Temperature
+TargetHum = 20 #Target Humidity
+TargetGrd = 200 #Target Soil Moisture 
+TargetLux = 200 #Target Illumination 
+
+app = Flask(__name__)
+
+@app.route('/home')
+def home():
+
+@app.route('/tmp/<name>')
+def hello_tmp(name):
+	global tmp1
+	tmp1 = name
+	return 'now tmp %s degree' % tmp1 
+
+@app.route('/tmpUp')
+def tmpUp():
+	global TargetTmp
+	temp = int(TargetTmp) + 1
+	TargetTmp = str(temp)
+	return  'target tmp %s degree' % TargetTmp
+
+@app.route('/tmpDown')
+def tmpDown():
+	global TargetTmp
+	temp = int(TargetTmp) - 1
+	TargetTmp = str(temp)
+	return 'target tmp %s degree' % TargetTmp
+
+@app.route('/hum<name>')
+def hello_hum(name):
+	global hum
+	hum = name 
+	return 'now hum  %s' % hum
+
+@app.route('/humUp')
+def humUp():
+	global TargetHum
+	temp = int(TargetHum) + 1
+	TargetHum = str(temp)
+	return 'target hum %s degree' % TargetHum
+
+@app.route('/humDown')
+def humDown():
+	global TargetHum
+	temp = int(TargetHum) - 1
+	TargetHum = str(temp)
+	return 'target hum %s degree' % TargetHum
+
+@app.route('/lux/<name>')
+def hello_lux(name):
+	global lux
+	lux = name
+	return  'now lux %s' % lux
+
+@app.route('/luxOn')
+def luxOn():
+	if int(lux) >= TargetLux:
+		return 1
+	return 0
+
+@app.route('/luxOff')
+def luxOff():
+	if int(lux) < TargetLux:
+		return 0
+	return 1
+
+@app.route('/grd/<name>')
+def hello_grd(name):
+	global grd
+	grd = name
+	return 'now grd %s%%' % grd
+
+@app.route('/grdOn')
+def grdOn():
+	if int(grd) >= TargetGrd:
+		return 1
+	return 0
+
+@app.route('/grdOff')
+def grdOff():
+	if int(grd) < TargetGrd:
+		return 0
+	return 1
+@app.route('/control/<name>')
+def hello_control(name):
+	return 'control %s' & tmp1
+
+if __name__ == '__main__':
+	app.run(host='0.0.0.0', port=80)
